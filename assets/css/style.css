@@ -198,7 +198,7 @@ p { margin: 0 0 1em; }
 /* Split texte / image */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
 .split--reverse .split__media { order: -1; }
-.split__media img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); }
+.split__media img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); }
 .split__media--wide img { aspect-ratio: 3/2; }
 .split__media--square img { aspect-ratio: 1/1; }
 .split h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; }
