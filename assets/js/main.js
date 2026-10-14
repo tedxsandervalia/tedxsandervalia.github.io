@@ -104,6 +104,26 @@
     });
   }
 
+  /* ----- Vidéos : la miniature est remplacée par le lecteur YouTube au clic (rien n'est chargé depuis YouTube avant) ----- */
+  document.querySelectorAll(".yt[data-id]").forEach(function (btn) {
+    var id = btn.getAttribute("data-id");
+    btn.insertAdjacentHTML("afterbegin",
+      '<img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy">' +
+      '<span class="yt__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>');
+    btn.addEventListener("click", function () {
+      var frame = document.createElement("iframe");
+      frame.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+      frame.title = btn.getAttribute("aria-label") || "Vidéo";
+      frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      frame.allowFullscreen = true;
+      var box = document.createElement("div");
+      box.className = "yt is-playing";
+      box.appendChild(frame);
+      btn.replaceWith(box);
+      frame.focus();
+    }, { once: true });
+  });
+
   /* ----- Formulaire de contact : ouvre la messagerie (site statique, sans serveur) ----- */
   var form = document.querySelector("#contact-form");
   if (form) {

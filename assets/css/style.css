@@ -329,15 +329,30 @@ p { margin: 0 0 1em; }
 .lightbox__prev { left: 8px; top: 50%; transform: translateY(-50%); }
 .lightbox__next { right: 8px; top: 50%; transform: translateY(-50%); }
 
-/* Vidéos */
-.video-placeholder {
-  position: relative; aspect-ratio: 16/9; border-radius: var(--radius); overflow: hidden; background: var(--grey-900);
-  display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white);
+/* Vidéos : lecteur YouTube « léger » (miniature, puis lecteur YouTube au clic) */
+.yt {
+  position: relative; display: block; width: 100%; aspect-ratio: 16/9; border: 0; padding: 0; cursor: pointer;
+  border-radius: var(--radius); overflow: hidden; background: #000; color: var(--white);
 }
-.video-placeholder img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; }
-.video-placeholder div { position: relative; padding: 24px; }
-.video-placeholder svg { width: 72px; height: 72px; color: var(--red); margin: 0 auto 16px; }
-.video-placeholder strong { display: block; font-size: clamp(22px, 3vw, 32px); }
+.yt img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease), opacity .3s; }
+.yt::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.55)); }
+.yt__play {
+  position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 68px; height: 68px; border-radius: 50%;
+  background: var(--red); display: grid; place-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.35); transition: transform .3s var(--ease);
+}
+.yt__play svg { width: 30px; height: 30px; margin-left: 4px; }
+.yt:hover img, .yt:focus-visible img { transform: scale(1.04); }
+.yt:hover .yt__play, .yt:focus-visible .yt__play { transform: translate(-50%, -50%) scale(1.08); }
+.yt:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+.yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.yt.is-playing::after { display: none; }
+.videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 24px; }
+@media (max-width: 1000px) { .videos { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .videos { grid-template-columns: 1fr; } }
+.video h3 { font-size: 19px; margin: 14px 0 4px; }
+.video p { margin: 0; font-size: 15px; color: var(--grey-700); }
+.section--dark .video p { color: #c9c9c9; }
+.video__more { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--grey-500); }
 
 /* Citation */
 .quote { max-width: 900px; margin: 0 auto; text-align: center; }
