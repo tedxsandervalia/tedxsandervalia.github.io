@@ -416,3 +416,28 @@ p { margin: 0 0 1em; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Liste dépliable des talks (page Éditions) */
+.talks { margin-top: 24px; border-top: 1px solid var(--grey-200); }
+.talks summary { cursor: pointer; list-style: none; padding: 14px 0; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+.talks summary::-webkit-details-marker { display: none; }
+.talks summary::before { content: "+"; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--red); color: var(--white); font-weight: 700; line-height: 1; flex: none; }
+.talks[open] summary::before { content: "–"; }
+.talks summary:hover { color: var(--red); }
+.talks ul { list-style: none; margin: 0 0 8px; padding: 0; }
+.talks li { padding: 10px 0; border-top: 1px solid var(--grey-200); font-size: 16px; color: var(--grey-700); line-height: 1.45; }
+.talks li strong { display: block; color: var(--ink); font-size: 16px; }
+
+/* Affiches par édition (page Éditions) : affichées à leur taille d'origine (206 px), jamais agrandies */
+.posters { margin-top: calc(32px - clamp(48px, 7vw, 96px)); } /* rapproche la grille de son édition (gap du conteneur) */
+.posters__title { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-500); margin: 0 0 14px; }
+.posters__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 160px)); gap: 12px; align-items: start; }
+.posters__grid img { width: 100%; height: auto; max-width: 206px; aspect-ratio: 1/1; object-fit: cover; border-radius: 4px; border: 1px solid var(--grey-200); background: var(--grey-100); }
+.posters__main { margin: 0; }
+.posters__main img { border: 2px solid var(--red); }
+.posters__main figcaption { font-size: 12px; font-weight: 600; color: var(--red); margin-top: 6px; }
+
+/* Affiche officielle à la place de la photo d'édition : affichée entière, sans recadrage */
+.split__media--poster { display: flex; justify-content: center; }
+.split__media--poster img { width: auto; max-width: 100%; height: auto; max-height: 620px; aspect-ratio: auto; object-fit: contain; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+.split__media--small img { width: 100%; max-width: 309px; } /* source de 206 px : agrandissement limité à 1,5× */
